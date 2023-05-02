@@ -1,0 +1,17 @@
+---
+- hosts: dockerhost
+  tasks:
+  - name: stop existing container
+    command: docker stop registeration-app
+    ignore_errors: yes
+
+  - name: remove the container
+    command: docker rm registeration-app
+    ignore_errors: yes
+
+  - name: docker remove image
+    command: docker rmi manoharshetty507/registry-app:latest
+    ignore_errors: yes
+
+  - name: Create a Container
+    command: docker run -d --name registeration-app -p 8082:8080 manoharshetty507/registry-app:latest
