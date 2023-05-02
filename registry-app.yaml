@@ -1,0 +1,13 @@
+---
+- hosts: ansible
+  tasks:
+  - name: Create Docker Image
+    command: docker build -t registry-app:latest .
+    args:
+      chdir: /opt/docker
+
+  - name: Create Tag to Push Image into Dockerhub
+    command: docker tag registry-app:latest manoharshetty507/registry-app:latest
+
+  - name: Push Image to Dockerhub
+    command: docker push manoharshetty507/registry-app:latest
